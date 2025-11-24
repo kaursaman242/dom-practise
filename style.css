@@ -1,0 +1,17 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+li{
+    color: white;
+    justify-content: space-around;
+    padding: 5px 0px 5px 0px;
+}
+
+li:hover{
+    background-color: white;
+    color: black;
+}
+
