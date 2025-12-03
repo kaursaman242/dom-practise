@@ -1,0 +1,165 @@
+/* body {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background: #f7f7f7;
+    font-family: Arial;
+}
+
+.slider-container {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 4100%;
+    background-color: aquamarine    ;
+}
+.slider img {
+    width: 100%;
+    height: 100%;
+    display: none;
+    max-width: 60%;
+}
+
+
+
+.slider img.active {
+    display: block;
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateX(0%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#prev { left: 10px; }
+#next { right: 10px; } */
+
+:root{
+  --width: 900px; /* change carousel width here */
+  --height: 380px;
+  --gap: 12px;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  align-items:center;
+  padding:40px;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f3f6f9;
+}
+
+/* Carousel container */
+.carousel{
+  width:var(--width);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* viewport: visible area that hides overflow */
+.viewport{
+  width:100%;
+  height:var(--height);
+  overflow:hidden; /* important */
+  border-radius:12px;
+  background: #e8f3ff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  display:flex;
+  gap:var(--gap);
+  align-items:center;
+  justify-content:center;
+  padding: 10px;
+  box-sizing:border-box;
+}
+
+/* slots control the 20%/50%/20% layout */
+.slot{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  overflow:hidden;
+  border-radius:10px;
+  flex: 0 0 auto; /* don't grow/shrink unexpectedly */
+}
+
+/* widths: left 20%, center 50%, right 20% */
+.slot-left, .slot-right { width:20%; }
+.slot-center { width:50%; }
+
+/* images fill their slot */
+.slot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition: transform .35s ease, box-shadow .35s ease, opacity .35s ease;
+}
+
+/* visual emphasis for center */
+.slot-center img{
+  transform: scale(1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  border-radius:8px;
+}
+
+/* side images slightly dimmer / smaller for effect */
+.slot-left img, .slot-right img{
+  transform: scale(0.98);
+  opacity:0.95;
+  filter: saturate(.95);
+  border-radius:6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+}
+
+/* Buttons */
+.btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  color:white;
+  border:none;
+  width:44px;
+  height:44px;
+  border-radius:8px;
+  font-size:22px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  user-select:none;
+}
+.btn:active{ transform: translateY(-50%) scale(.98); }
+.carousel .prev{ left:8px; }
+.carousel .next{ right:8px; }
+
+/* small screen responsiveness */
+@media (max-width: 700px){
+  :root{ --width: 320px; --height: 200px; }
+  .slot-left, .slot-right{ display:none; } /* show center only on very small screens */
+  .slot-center{ width:100%; }
+}
